@@ -27,22 +27,22 @@ sleep 10
 
 # Instalar dependencias de Composer
 echo "📦 Instalando dependencias de Composer..."
-docker-compose exec php composer install --no-interaction --prefer-dist
+docker compose exec php composer install --no-interaction --prefer-dist
 
 # Ejecutar migraciones
 echo "🗄️  Ejecutando migraciones de base de datos..."
-docker-compose exec php php yii migrate --interactive=0
+docker compose exec php php yii migrate --interactive=0
 
 # Crear directorios necesarios
 echo "📁 Creando directorios necesarios..."
-docker-compose exec php mkdir -p runtime/logs runtime/cache runtime/sessions
-docker-compose exec php mkdir -p common/certificates
-docker-compose exec php mkdir -p web/assets
+docker compose exec php mkdir -p runtime/logs runtime/cache runtime/sessions
+docker compose exec php mkdir -p common/certificates
+docker compose exec php mkdir -p web/assets
 
 # Configurar permisos
 echo "🔐 Configurando permisos..."
-docker-compose exec php chmod -R 777 runtime
-docker-compose exec php chmod -R 777 web/assets
+docker compose exec php chmod -R 777 runtime
+docker compose exec php chmod -R 777 web/assets
 
 echo -e "${GREEN}✅ Configuración completada exitosamente!${NC}"
 echo ""
@@ -56,4 +56,4 @@ echo -e "${YELLOW}📝 Próximos pasos:${NC}"
 echo "   1. Edite el archivo .env con sus configuraciones"
 echo "   2. Configure los certificados digitales en common/certificates/"
 echo "   3. Cree un usuario administrador ejecutando:"
-echo "      docker-compose exec php php yii user/create admin@example.com password"
+echo "      docker compose exec php php yii user/create admin@example.com password"
