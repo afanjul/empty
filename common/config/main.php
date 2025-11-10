@@ -1,6 +1,6 @@
 <?php
 
-use yii\caching\RedisCache;
+use yii\redis\Cache;
 use yii\redis\Connection;
 use yii\queue\redis\Queue;
 
@@ -24,7 +24,7 @@ return [
 
         // Caché con Redis
         'cache' => [
-            'class' => RedisCache::class,
+            'class' => Cache::class,
             'redis' => [
                 'hostname' => getenv('REDIS_HOST') ?: 'localhost',
                 'port' => getenv('REDIS_PORT') ?: 6379,
