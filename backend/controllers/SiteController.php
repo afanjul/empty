@@ -22,6 +22,15 @@ class SiteController extends Controller
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function beforeAction($action)
+    {
+        $this->layout = false;
+        return parent::beforeAction($action);
+    }
+
+    /**
      * Displays homepage.
      *
      * @return mixed
