@@ -17,7 +17,7 @@ class m241109_000003_create_rbac_tables extends Migration
         // Tabla auth_rule - Reglas de negocio para permisos
         $this->createTable('{{%auth_rule}}', [
             'name' => $this->string(64)->notNull(),
-            'data' => $this->blob()->null(),
+            'data' => $this->binary()->null(),
             'created_at' => $this->bigInteger()->unsigned()->null(),
             'updated_at' => $this->bigInteger()->unsigned()->null(),
             'PRIMARY KEY (name)',
@@ -29,7 +29,7 @@ class m241109_000003_create_rbac_tables extends Migration
             'type' => $this->smallInteger()->notNull()->comment('1=role, 2=permission'),
             'rule_name' => $this->string(64)->null(),
             'description' => $this->text()->null(),
-            'data' => $this->blob()->null(),
+            'data' => $this->binary()->null(),
             'created_at' => $this->bigInteger()->unsigned()->null(),
             'updated_at' => $this->bigInteger()->unsigned()->null(),
             'created_by' => $this->integer()->unsigned()->null(),
