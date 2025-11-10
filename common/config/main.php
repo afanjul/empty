@@ -16,7 +16,7 @@ return [
         // Redis para caché
         'redis' => [
             'class' => Connection::class,
-            'hostname' => getenv('REDIS_HOST') ?: 'localhost',
+            'hostname' => getenv('REDIS_HOST') ?: 'redis',
             'port' => getenv('REDIS_PORT') ?: 6379,
             'database' => getenv('REDIS_DB') ?: 0,
             'password' => getenv('REDIS_PASSWORD') ?: null,
@@ -26,7 +26,7 @@ return [
         'cache' => [
             'class' => Cache::class,
             'redis' => [
-                'hostname' => getenv('REDIS_HOST') ?: 'localhost',
+                'hostname' => getenv('REDIS_HOST') ?: 'redis',
                 'port' => getenv('REDIS_PORT') ?: 6379,
                 'database' => getenv('REDIS_CACHE_DB') ?: 1,
                 'password' => getenv('REDIS_PASSWORD') ?: null,

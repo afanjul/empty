@@ -4,12 +4,12 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => sprintf(
         'mysql:host=%s;port=%s;dbname=%s',
-        getenv('DB_HOST') ?: 'localhost',
+        getenv('DB_HOST') ?: 'mysql',
         getenv('DB_PORT') ?: '3306',
         getenv('DB_NAME') ?: 'facturacheck'
     ),
-    'username' => getenv('DB_USER') ?: 'root',
-    'password' => getenv('DB_PASSWORD') ?: '',
+    'username' => getenv('DB_USER') ?: 'facturacheck',
+    'password' => getenv('DB_PASSWORD') ?: 'facturacheck',
     'charset' => 'utf8mb4',
     'enableSchemaCache' => true,
     'schemaCacheDuration' => 3600,
