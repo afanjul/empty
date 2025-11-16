@@ -1,20 +1,64 @@
 <?php
-$this->title = 'Documentos de Facturación';
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
+
+/** @var yii\web\View $this */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = 'Documentos';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="document-index">
 
-<div class="card">
-    <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Documentos de Facturación</h2>
-    <p style="color: #7f8c8d; margin-bottom: 2rem;">
-        Visualice y gestione todas las facturas y documentos fiscales generados.
-    </p>
-
-    <div style="background: #ecf0f1; padding: 2rem; border-radius: 8px; text-align: center;">
-        <h3 style="color: #34495e; margin-bottom: 1rem;">📄 Funcionalidad en Desarrollo</h3>
-        <p style="color: #7f8c8d;">
-            El listado y gestión de documentos se implementará próximamente con integración Verifactu.
-        </p>
-        <div style="margin-top: 1.5rem;">
-            <a href="/admin/" class="btn">Volver al Dashboard</a>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('Crear Documento', ['create'], ['class' => 'btn btn-success']) ?>
     </div>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'tableOptions' => ['class' => 'table table-striped table-bordered'],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'document_id',
+            'document_number',
+            [
+                'attribute' => 'document_type_id',
+                'value' => function($model) {
+                    return match($model->document_type_id) {
+                        1 => 'Factura',
+                        2 => 'Ticket',
+                        3 => 'Nota de Crédito',
+                        4 => 'Pedido',
+                        5 => 'Proforma',
+                        default => 'Desconocido',
+                    };
+                },
+            ],
+            'recipient_name',
+            [
+                'attribute' => 'issue_date',
+                'format' => ['date', 'php:d/m/Y'],
+            ],
+            [
+                'attribute' => 'total_amount',
+                'format' => ['currency', 'EUR'],
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->getStatusLabel();
+                },
+            ],
+
+            [
+                'class' => ActionColumn::class,
+                'template' => '{view} {update} {delete}',
+            ],
+        ],
+    ]); ?>
+
 </div>

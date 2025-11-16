@@ -5,11 +5,12 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var backend\models\UserForm $model */
 
-$this->title = 'Crear Usuario';
+$this->title = 'Actualizar Usuario: ' . $model->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $model->getFullName(), 'url' => ['view', 'id' => $model->user_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
-<div class="user-create">
+<div class="user-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

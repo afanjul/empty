@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Account;
-use backend\models\AccountForm;
+use common\models\Contact;
+use backend\models\ContactForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 
 /**
- * AccountController implements the CRUD actions for Account model.
+ * ContactController implements the CRUD actions for Contact model.
  */
-class AccountController extends Controller
+class ContactController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -34,12 +34,12 @@ class AccountController extends Controller
     }
 
     /**
-     * Lists all Account models.
+     * Lists all Contact models.
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Account::find()->where(['deleted_at' => null])->orderBy(['created_at' => SORT_DESC]),
+            'query' => Contact::find()->where(['deleted_at' => null])->orderBy(['created_at' => SORT_DESC]),
             'pagination' => [
                 'pageSize' => 20,
             ],
@@ -51,7 +51,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Displays a single Account model.
+     * Displays a single Contact model.
      */
     public function actionView($id)
     {
@@ -61,16 +61,15 @@ class AccountController extends Controller
     }
 
     /**
-     * Creates a new Account model.
+     * Creates a new Contact model.
      */
     public function actionCreate()
     {
-        $model = new AccountForm();
-        $model->scenario = 'create';
+        $model = new ContactForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Cuenta creada correctamente.');
-            return $this->redirect(['view', 'id' => $model->tenant_id]);
+            Yii::$app->session->setFlash('success', 'Contacto creado correctamente.');
+            return $this->redirect(['view', 'id' => $model->contact_id]);
         }
 
         return $this->render('create', [
@@ -79,15 +78,15 @@ class AccountController extends Controller
     }
 
     /**
-     * Updates an existing Account model.
+     * Updates an existing Contact model.
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Cuenta actualizada correctamente.');
-            return $this->redirect(['view', 'id' => $model->tenant_id]);
+            Yii::$app->session->setFlash('success', 'Contacto actualizado correctamente.');
+            return $this->redirect(['view', 'id' => $model->contact_id]);
         }
 
         return $this->render('update', [
@@ -96,7 +95,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Deletes an existing Account model.
+     * Deletes an existing Contact model.
      */
     public function actionDelete($id)
     {
@@ -104,19 +103,19 @@ class AccountController extends Controller
         $model->deleted_at = date('Y-m-d H:i:s');
         $model->save(false);
 
-        Yii::$app->session->setFlash('success', 'Cuenta eliminada correctamente.');
+        Yii::$app->session->setFlash('success', 'Contacto eliminado correctamente.');
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Account model based on its primary key value.
+     * Finds the Contact model based on its primary key value.
      */
     protected function findModel($id)
     {
-        if (($model = Account::findOne(['tenant_id' => $id, 'deleted_at' => null])) !== null) {
+        if (($model = Contact::findOne($id)) !== null) {
             return $model;
         }
 
-        throw new NotFoundHttpException('La cuenta solicitada no existe.');
+        throw new NotFoundHttpException('El contacto solicitado no existe.');
     }
 }

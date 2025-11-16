@@ -1,20 +1,54 @@
 <?php
-$this->title = 'Gestión de Usuarios';
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
+
+/** @var yii\web\View $this */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = 'Usuarios';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="user-index">
 
-<div class="card">
-    <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Usuarios del Sistema</h2>
-    <p style="color: #7f8c8d; margin-bottom: 2rem;">
-        Administre los usuarios con acceso al panel de administración.
-    </p>
-
-    <div style="background: #ecf0f1; padding: 2rem; border-radius: 8px; text-align: center;">
-        <h3 style="color: #34495e; margin-bottom: 1rem;">👥 Funcionalidad en Desarrollo</h3>
-        <p style="color: #7f8c8d;">
-            La gestión de usuarios se implementará próximamente con roles y permisos RBAC.
-        </p>
-        <div style="margin-top: 1.5rem;">
-            <a href="/admin/" class="btn">Volver al Dashboard</a>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('Crear Usuario', ['create'], ['class' => 'btn btn-success']) ?>
     </div>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'tableOptions' => ['class' => 'table table-striped table-bordered'],
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'user_id',
+            'email:email',
+            'first_name',
+            'last_name',
+            [
+                'attribute' => 'is_superadmin',
+                'value' => function($model) {
+                    return $model->is_superadmin ? 'Sí' : 'No';
+                },
+            ],
+            [
+                'attribute' => 'is_active',
+                'value' => function($model) {
+                    return $model->is_active ? 'Activo' : 'Inactivo';
+                },
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:d/m/Y H:i'],
+            ],
+
+            [
+                'class' => ActionColumn::class,
+                'template' => '{view} {update} {delete}',
+            ],
+        ],
+    ]); ?>
+
 </div>

@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var backend\models\UserForm $model */
+/** @var backend\models\ContactForm $model */
 
-$this->title = 'Crear Usuario';
-$this->params['breadcrumbs'][] = ['label' => 'Usuarios', 'url' => ['index']];
+$this->title = 'Crear Contacto';
+$this->params['breadcrumbs'][] = ['label' => 'Contactos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-create">
+<div class="contact-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

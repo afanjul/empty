@@ -5,11 +5,12 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var backend\models\AccountForm $model */
 
-$this->title = 'Crear Cuenta';
+$this->title = 'Actualizar Cuenta: ' . $model->company_name;
 $this->params['breadcrumbs'][] = ['label' => 'Cuentas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => $model->company_name, 'url' => ['view', 'id' => $model->tenant_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
-<div class="account-create">
+<div class="account-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

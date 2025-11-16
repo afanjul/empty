@@ -7,14 +7,14 @@ use yii\grid\ActionColumn;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Cuentas';
+$this->title = 'Contactos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="account-index">
+<div class="contact-index">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1><?= Html::encode($this->title) ?></h1>
-        <?= Html::a('Crear Cuenta', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Contacto', ['create'], ['class' => 'btn btn-success']) ?>
     </div>
 
     <?= GridView::widget([
@@ -23,14 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'tenant_id',
-            'company_name',
-            'tax_id',
+            'contact_id',
+            'name',
             'email:email',
+            'phone',
+            'tax_id',
             [
-                'attribute' => 'status',
+                'attribute' => 'contact_type',
                 'value' => function($model) {
-                    return $model->status == 1 ? 'Activo' : 'Inactivo';
+                    return match($model->contact_type) {
+                        1 => 'Cliente',
+                        2 => 'Proveedor',
+                        3 => 'Ambos',
+                        default => 'Desconocido',
+                    };
                 },
             ],
             [
