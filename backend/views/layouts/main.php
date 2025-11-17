@@ -8,6 +8,7 @@ use yii\helpers\Html;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title ?? 'Facturacheck Admin') ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; }
@@ -39,8 +40,9 @@ use yii\helpers\Html;
             <li><a href="/admin/">Dashboard</a></li>
             <li><a href="/admin/account">Cuentas</a></li>
             <li><a href="/admin/user">Usuarios</a></li>
+            <li><a href="/admin/contact">Contactos</a></li>
             <li><a href="/admin/document">Documentos</a></li>
-            <li><a href="/admin/settings">Configuración</a></li>
+            <li style="margin-left: auto;"><a href="/admin/site/logout" data-method="post">Cerrar Sesión</a></li>
         </ul>
     </nav>
     <div class="container">
@@ -49,5 +51,6 @@ use yii\helpers\Html;
     <div class="footer">
         &copy; <?= date('Y') ?> Facturacheck - Powered by Yii Framework
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
